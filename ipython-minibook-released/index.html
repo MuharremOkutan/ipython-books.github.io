@@ -28,7 +28,7 @@
         <link rel="alternate"  href="http://ipython-books.github.io/feeds/all.atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
         <link rel="alternate" href="http://ipython-books.github.io/feeds/all.rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
-        <title>IPython Books</title>
+        <title>IPython Books - IPython Minibook released</title>
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -42,9 +42,16 @@
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
 <body>
@@ -79,31 +86,16 @@
     <div id="layout" class="pure-g">
         <section id="content" class="pure-u-1 pure-u-md-3-4">
             <div class="l-box">
-    <section id="posts">
 
-        <header id="posts-header">
-            <h1>IPython Books</h1>
-        </header>
+    <header id="post-header">
+        <h1>IPython Minibook released</h1>
+            <div class="post-meta">
+                April 27, 2013
+            </div>
+    </header>
 
-    <section class="post">
-        <header class="post-header">
-            <h3><a href="http://ipython-books.github.io/ipython-cookbook-released/">IPython Cookbook released</a></h3>
-            <p class="sub-header-3">2014-09-26</p>
-            <p class="post-summary"><p>My new book, <a href="/cookbook/">IPython Interactive Computing and Visualization Cookbook</a>, has just been released! A sequel to my previous <a href="http://ipython.rossant.net">beginner-level book on Python for data analysis</a>, this new 500-page book is a <strong>complete advanced-level guide to Python for data science</strong>. The 100+ recipes cover not only interactive and high-performance computing topics, but also data science methods in statistics, data mining, machine learning, signal processing, image processing, network analysis, and mathematical modeling.</p>
-</p>
-        </header>
-        <div class="read-more">
-            <a class="pure-button" href="http://ipython-books.github.io/ipython-cookbook-released/">
-                read on
-            </a>
-        </div>
-    </section>
-        <hr />
-    <section class="post">
-        <header class="post-header">
-            <h3><a href="http://ipython-books.github.io/ipython-minibook-released/">IPython Minibook released</a></h3>
-            <p class="sub-header-3">2013-04-27</p>
-            <p class="post-summary"><p>I'm glad to present my new book, <a href="/minibook/">Learning IPython for Interactive Computing and Data Visualization</a>, Packt
+    <section id="post">
+        <p>I'm glad to present my new book, <a href="/minibook/">Learning IPython for Interactive Computing and Data Visualization</a>, Packt
 Publishing.</p>
 <p>This book is a <strong>beginner-level introduction to IPython</strong> for
 interactive Python programming, high-performance numerical computing,
@@ -111,26 +103,41 @@ and data visualization. It assumes nothing more than familiarity with
 Python. It targets developers, students, teachers, hobbyists who know
 Python a bit, and who want to learn IPython for the extended console,
 the Notebook, and for more advanced scientific applications.</p>
-</p>
-        </header>
-        <div class="read-more">
-            <a class="pure-button" href="http://ipython-books.github.io/ipython-minibook-released/">
-                read on
-            </a>
-        </div>
+
+
+<p>The book first introduces IPython for interactive Python and shell
+programming. It shows how IPython can considerably improve the
+productivity of a developer who creates, debugs, benchmarks and profiles
+Python code.</p>
+<p>Then, the reader learns the very basics of vector computing, and
+discovers how to load and analyze numerical and tabular data with NumPy
+and Pandas. The book shows the interactive visualization capabilities of
+the platform with Matplotlib, SciPy and PIL. It also contains a few
+image processing examples.</p>
+<p>Some techniques to accelerate Python code are also demonstrated, using
+either interactive parallel computing features from IPython (using MPI
+or not), or Cython to compile a portion of the code in C for really
+interesting speedups.</p>
+<p>Finally, the book shows how IPython can be customized for advanced uses,
+notably with the creation of new extensions and magic commands.</p>
+<p>The code is stored in a <a href="https://github.com/rossant/ipython-minibook">GitHub
+repository</a>. It contains
+IPython notebooks with most examples from the book.</p>
     </section>
+
 
 <nav class="pagination-wrapper">
     <div class="pagination">
         <div class="pagination-left">
+                <a href="http://ipython-books.github.io/ipython-cookbook-released/">
+                    &larr; previous
+                </a>
+        </div>
+        <div class="pagination-right">
                 &nbsp;
         </div>
-
-
-        <div class="pagination-right">
-        </div>
     </div>
-</nav>    </section>
+</nav>
             </div>
         </section>
         
