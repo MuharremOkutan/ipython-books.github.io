@@ -228,13 +228,41 @@ code {
     white-space: pre;
 }
 
+
+/***** IPYNB INPUT OUTPUT ******/
+.ipynb-input .highlight pre {
+    margin: 0;
+    border-left: 1em solid #888;
+}
+
+.ipynb-output {
+
+    font-family: 'Ubuntu Mono';
+    font-size: .9em;
+    padding: .5em;
+
+    margin: 0 0 1em 0;
+    /*padding: .25em .5em;*/
+    background-color: #ccc;
+}
+
+.ipynb-html {
+    margin: 1em 0;
+}
+
+.ipynb-html td, .ipynb-html th {
+    padding: .25em;
+}
+
+
+
 #post embed {
     width: 672px;
     height: 378px;
     margin: 1em 0;
 }
 
-#post img, .post img {
+#post img, .post img, .page img, #page img {
     max-width: 100%;
 }
 
@@ -299,7 +327,7 @@ h2 {
 
 h3 {
     margin: 1.25em 0 .75em 0;
-    font-size: 1.3em;
+    font-size: 1.35em;
     color: #777;
 }
 #content .sub-header-3 {

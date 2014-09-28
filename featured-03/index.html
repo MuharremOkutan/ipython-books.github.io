@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IPython Books, ">
+
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+        <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
+        <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
+
+        <title>IPython Books - Featured Recipe #3: Creating a route planner for road network</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
+    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+    <header id="header" class="pure-g">
+        <div class="pure-u-1 pure-u-md-3-4">
+             <div id="menu">
+                 <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/minibook/">Minibook</a></li>
+        <li><a href="/cookbook/">Cookbook</a></li>
+        <li><a href="http://cyrille.rossant.net">Author</a></li>
+</ul>                </div>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-4">
+            <div id="social">
+                <div class="pure-menu pure-menu-open pure-menu-horizontal">
+<ul>
+        <li><a href="https://twitter.com/cyrillerossant"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="https://github.com/ipython-books"><i class="fa fa-github"></i></a></li>
+</ul>                </div>
+            </div>
+        </div>
+    </header>
+       
+
+    
+    <div id="layout" class="pure-g">
+        <section id="content" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+
+    <header id="page-header">
+        <h1>Featured Recipe #3: Creating a route planner for road network</h1>
+    </header>
+
+    <section id="page">
+        <blockquote>
+<p>This is a featured recipe from the <a href="http://ipython-books.github.io/"><strong>IPython Cookbook</strong></a>, the definitive guide to <strong>high-performance scientific computing</strong> and <strong>data science</strong> in Python.</p>
+</blockquote>
+<p>In this featured recipe, we create a simple <strong>GPS-like route planner</strong> in Python. We retrieve California's road network data from the <em>United States Census Bureau</em> in order to find shortest paths and compute road itineraries between any two locations in California.</p>
+<h2>Getting Ready</h2>
+<p>For this recipe, you need IPython, NumPy, Pandas, matplotlib.</p>
+<p>You also need <a href="http://networkx.github.io/">NetworkX</a> and <a href="http://www.gdal.org/ogr/">GDAL/OGR</a>. On Windows, you can find binary installers on <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">Chris Gohlke's webpage</a>.</p>
+<blockquote>
+<p>At the time of this writing, NetworkX's support of Shapefile doesn't seem to be compatible with Python 3.x. For this reason, this recipe has only been successfully tested with Python 2.x.</p>
+</blockquote>
+<p>You also need <a href="https://github.com/rossant/smopy"><strong>Smopy</strong></a> and <a href="https://pillow.readthedocs.org/en/latest/">Pillow</a> for displaying <a href="http://www.openstreetmap.org/">OpenStreetMap maps</a>:</p>
+<div class="ipynb-input"><div class="highlight"><pre><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">smopy</span>
+</pre></div>
+</div>
+
+<p>Finally, you need to download the <a href="https://github.com/ipython-books/cookbook-data"><em>Road</em> dataset</a> on the book's website an extract it in the current folder. The data comes from the <a href="http://www.census.gov/geo/maps-data/data/tiger.html">United States Census Bureau website</a>.</p>
+<h2>How to do it...</h2>
+<ol>
+<li>Let's import the packages.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">networkx</span> <span class="kn">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">smopy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+</pre></div>
+</div>
+
+<ol>
+<li>We load the data (a Shapefile dataset) with NetworkX. This dataset contains detailed information about the primary roads in California. NetworkX's <code>read_shp</code> function returns a graph, where each node is a geographical position, and each edge contains information about the road linking the two nodes.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_shp</span><span class="p">(</span><span class="s">&quot;data/tl_2013_06_prisecroads.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<ol>
+<li>This graph is not necessarily connected, but we need a connected graph in order to compute shortest paths. Here, we take the largest connected subgraph using the <code>connected_component_subgraphs</code> function.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">sg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<pre class="ipynb-output">464</pre>
+
+<ol>
+<li>We define two positions (with the latitude and longitude). We will find the shortest path between these two positions.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">pos0</span> <span class="o">=</span> <span class="p">(</span><span class="mf">36.6026</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.9026</span><span class="p">)</span>
+<span class="n">pos1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">34.0569</span><span class="p">,</span> <span class="o">-</span><span class="mf">118.2427</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Each edge in the graph contains information about the road, including a list of points along this road. We first create a function that returns this array of coordinates, for any edge in the graph.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">n1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;If n0 and n1 are connected nodes in the graph, this function</span>
+<span class="sd">    return an array of point coordinates along the road linking</span>
+<span class="sd">    these two nodes.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">sg</span><span class="p">[</span><span class="n">n0</span><span class="p">][</span><span class="n">n1</span><span class="p">][</span><span class="s">&#39;Json&#39;</span><span class="p">])[</span><span class="s">&#39;coordinates&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+
+<ol>
+<li>We will notably use the road path to compute its length. We first need to define a function that computes the distance between any two points in geographical coordinates. This function has been found in <a href="http://stackoverflow.com/questions/8858838/need-help-calculating-geographical-distance">StackOverflow</a>.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">EARTH_R</span> <span class="o">=</span> <span class="mf">6372.8</span>
+<span class="k">def</span> <span class="nf">geocalc</span><span class="p">(</span><span class="n">lat0</span><span class="p">,</span> <span class="n">lon0</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the distance (in km) between two points in </span>
+<span class="sd">    geographical coordinates.&quot;&quot;&quot;</span>
+    <span class="n">lat0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat0</span><span class="p">)</span>
+    <span class="n">lon0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lon0</span><span class="p">)</span>
+    <span class="n">lat1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span>
+    <span class="n">lon1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lon1</span><span class="p">)</span>
+    <span class="n">dlon</span> <span class="o">=</span> <span class="n">lon0</span> <span class="o">-</span> <span class="n">lon1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlon</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+         <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> 
+         <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dlon</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dlon</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">EARTH_R</span> <span class="o">*</span> <span class="n">c</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Now, we define a function computing a path's length.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_path_length</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">geocalc</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">],</span>
+                          <span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Now, we update our graph by computing the distance between any two connected nodes. We add this information in the <code>distance</code> attribute of the edges.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="c"># Compute the length of the road segments.</span>
+<span class="k">for</span> <span class="n">n0</span><span class="p">,</span> <span class="n">n1</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">edges_iter</span><span class="p">():</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">get_path</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">get_path_length</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">sg</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">n0</span><span class="p">][</span><span class="n">n1</span><span class="p">][</span><span class="s">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span>
+</pre></div>
+</div>
+
+<ol>
+<li>The last step before we can find the shortest path in the graph, is to find the two nodes in the graph that are closest to the two requested positions.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+<span class="c"># Get the closest nodes in the graph.</span>
+<span class="n">pos0_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">nodes</span><span class="p">[:,::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">pos1_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">nodes</span><span class="p">[:,::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Now, we use NetworkX's <code>shortest_path</code> function to compute the shortest path between our two positions. We specify that the weight of every edge is the length of the road between them.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="c"># Compute the shortest path.</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">sg</span><span class="p">,</span> 
+                        <span class="n">source</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">pos0_i</span><span class="p">]),</span> 
+                        <span class="n">target</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">pos1_i</span><span class="p">]),</span>
+                        <span class="n">weight</span><span class="o">=</span><span class="s">&#39;distance&#39;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<pre class="ipynb-output">19</pre>
+
+<ol>
+<li>The itinerary has been computed. The <code>path</code> variable contains the list of edges that form the shortest path between our two positions. Now, we can get information about the itinerary with Pandas. The dataset has a few fields of interest, including the name and type (State, Interstate, etc.) of the roads.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">roads</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">sg</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span> 
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span> 
+                     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;FULLNAME&#39;</span><span class="p">,</span> <span class="s">&#39;MTFCC&#39;</span><span class="p">,</span> 
+                              <span class="s">&#39;RTTYP&#39;</span><span class="p">,</span> <span class="s">&#39;distance&#39;</span><span class="p">])</span>
+<span class="n">roads</span>
+</pre></div>
+</div>
+
+<div class="ipynb-html"><div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FULLNAME</th>
+      <th>MTFCC</th>
+      <th>RTTYP</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0 </th>
+      <td>    State Rte 1</td>
+      <td> S1200</td>
+      <td> S</td>
+      <td> 100.658130</td>
+    </tr>
+    <tr>
+      <th>1 </th>
+      <td>    State Rte 1</td>
+      <td> S1200</td>
+      <td> S</td>
+      <td>  33.419556</td>
+    </tr>
+    <tr>
+      <th>2 </th>
+      <td>   Cabrillo Hwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   4.399051</td>
+    </tr>
+    <tr>
+      <th>3 </th>
+      <td>    State Rte 1</td>
+      <td> S1200</td>
+      <td> S</td>
+      <td>  12.400382</td>
+    </tr>
+    <tr>
+      <th>4 </th>
+      <td>   Cabrillo Hwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>  36.693272</td>
+    </tr>
+    <tr>
+      <th>5 </th>
+      <td>   Cabrillo Hwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.017746</td>
+    </tr>
+    <tr>
+      <th>6 </th>
+      <td>   Cabrillo Hwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.439355</td>
+    </tr>
+    <tr>
+      <th>7 </th>
+      <td>   Cabrillo Hwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.130107</td>
+    </tr>
+    <tr>
+      <th>8 </th>
+      <td>    State Hwy 1</td>
+      <td> S1200</td>
+      <td> S</td>
+      <td>   0.007007</td>
+    </tr>
+    <tr>
+      <th>9 </th>
+      <td> el Camino Real</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   5.774056</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td> el Camino Real</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.507131</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td> el Camino Real</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>  33.550742</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>     US Hwy 101</td>
+      <td> S1200</td>
+      <td> U</td>
+      <td> 140.786519</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>     US Hwy 101</td>
+      <td> S1200</td>
+      <td> U</td>
+      <td>  75.852281</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>    Ventura Fwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>  49.045475</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>  Hollywood Fwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.885826</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>  Hollywood Fwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>  14.087603</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>  Hollywood Fwy</td>
+      <td> S1200</td>
+      <td> M</td>
+      <td>   0.010107</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<p>Here is the total length of this itinerary.</p>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">roads</span><span class="p">[</span><span class="s">&#39;distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+
+<pre class="ipynb-output">508.66434555909808</pre>
+
+<ol>
+<li>Finally, let display the itinerary on the map. We first retrieve the map with Smopy.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="nb">map</span> <span class="o">=</span> <span class="n">smopy</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">pos0</span><span class="p">,</span> <span class="n">pos1</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">margin</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Our path contains connected nodes in the graph. Every edge between two nodes is characterized by a list of points (constituting a part of the road). Therefore, we need to define a function that concatenates the positions along every edge in the path. A difficulty is that we need to concatenate the positions in the right order along our path. We choose the order based on the fact that the last point in an edge needs to be close to the first point in the next edge.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_full_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the positions along a path.&quot;&quot;&quot;</span>
+    <span class="n">p_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">curp</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">get_path</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">curp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">curp</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">curp</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">curp</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span>
+        <span class="n">p_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">curp</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">p_list</span><span class="p">)</span>
+</pre></div>
+</div>
+
+<ol>
+<li>We convert the path in pixels in order to display it on the Smopy map.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">linepath</span> <span class="o">=</span> <span class="n">get_full_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">map</span><span class="o">.</span><span class="n">to_pixels</span><span class="p">(</span><span class="n">linepath</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">linepath</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+
+<ol>
+<li>Finally, we display the map, with our two positions and the computed itinerary between them.</li>
+</ol>
+<div class="ipynb-input"><div class="highlight"><pre><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>
+<span class="nb">map</span><span class="o">.</span><span class="n">show_mpl</span><span class="p">();</span>
+<span class="c"># Plot the itinerary.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;-k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">);</span>
+<span class="c"># Mark our two positions.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;ob&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;or&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+
+<p><img alt="Route planner" src="/images/road.jpg" /></p>
+<h2>How it works...</h2>
+<p>We computed the shortest path with NetworkX's <code>shortest_path</code> function. Here, this function used <strong>Dijkstra's algorithm</strong>. This algorithm has a wide variety of applications, for example in network routing protocols.</p>
+<p>There are different ways to compute the geographical distance between two points. Here, we used a relatively precise formula: the <strong>orthodromic distance</strong> (also called <strong>great-circle distance</strong>), which assumes that the Earth is a perfect sphere. We could also have used a simpler formula since the distance between two successive points on a road is small.</p>
+<h2>There's more...</h2>
+<p>You can find more information about shortest path problems and Dijkstra's algorithm in the following references:</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Shortest_path_problem">Shortest path</a>.</li>
+<li><a href="http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra's algorithm</a>.</li>
+</ul>
+<p>Here are a few references about geographical distances:</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Geographical_distance">Geographical distance</a>.</li>
+<li><a href="http://en.wikipedia.org/wiki/Great_Circle">Great circle</a>.</li>
+<li><a href="http://en.wikipedia.org/wiki/Great-circle_distance">Great circle distance</a>.</li>
+</ul>
+<blockquote>
+<p>This was a featured recipe from the <a href="http://ipython-books.github.io/">IPython Cookbook</a>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>, Packt Publishing, 2014.</p>
+</blockquote>
+    </section>
+
+            </div>
+        </section>
+        
+        <nav id="sidebar" class="pure-u-1 pure-u-md-1-4">
+            <div class="l-box">
+
+<section class="books">
+	<div class="book-1">
+		<div class="box">
+			<a href="/minibook/"><img src="/images/minibook.jpg"/></a>
+	    </div>
+	</div>
+	<div class="book-2">
+		<div class="box">
+			<a href="/cookbook/"><img src="/images/cookbook.jpg"/></a>
+	    </div>
+	</div>
+	<p>
+		Two books on <strong>Python for data science</strong>, by <a href="http://cyrille.rossant.net">Cyrille Rossant</a>.
+	</p>
+	<div class="book-1">
+		<div class="box">
+			<p>beginner-level</p>
+			<a href="https://github.com/ipython-books/minibook-code"><button class="button-book1 button-code pure-button">
+				<i class="fa fa-code"></i>&nbsp;&nbsp;&nbsp;code
+			</button></a>
+			<a href="https://github.com/ipython-books/minibook-data"><button class="button-book1 button-data pure-button">
+				<i class="fa fa-database"></i>&nbsp;&nbsp;&nbsp;data
+			</button></a>
+	    </div>
+	</div>
+	<div class="book-2">
+		<div class="box">
+			<p>advanced-level</p>
+			<a href="https://github.com/ipython-books/cookbook-code"><button class="button-book2 button-code pure-button">
+				<i class="fa fa-code"></i>&nbsp;&nbsp;&nbsp;code
+			</button></a>
+			<a href="https://github.com/ipython-books/cookbook-data"><button class="button-book2 button-data pure-button">
+				<i class="fa fa-database"></i>&nbsp;&nbsp;&nbsp;data
+			</button></a>
+	    </div>
+	</div>
+</section>            </div>
+        </nav>
+        
+        <footer id="footer" class="pure-u-1 pure-u-md-3-4">
+            <div class="l-box">
+                <div>
+                    <p>&copy; <a href="http://cyrille.rossant.net">Cyrille Rossant</a> &ndash;
+                        Built with <a href="https://github.com/PurePelicanTheme/pure-single">Pure Theme</a>
+                        for <a href="http://blog.getpelican.com/">Pelican</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+    
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9752080; 
+var sc_invisible=1; 
+var sc_security="837928c1"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/9752080/0/837928c1/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body>
+</html>
+
