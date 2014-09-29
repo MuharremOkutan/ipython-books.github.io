@@ -119,14 +119,14 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="2">
 <li>We load the data (a Shapefile dataset) with NetworkX. This dataset contains detailed information about the primary roads in California. NetworkX's <code>read_shp</code> function returns a graph, where each node is a geographical position, and each edge contains information about the road linking the two nodes.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_shp</span><span class="p">(</span><span class="s">&quot;data/tl_2013_06_prisecroads.shp&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 
-<ol>
+<ol start="3">
 <li>This graph is not necessarily connected, but we need a connected graph in order to compute shortest paths. Here, we take the largest connected subgraph using the <code>connected_component_subgraphs</code> function.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">sg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_component_subgraphs</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span>
@@ -136,7 +136,7 @@
 
 <pre class="ipynb-output">464</pre>
 
-<ol>
+<ol start="4">
 <li>We define two positions (with the latitude and longitude). We will find the shortest path between these two positions.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">pos0</span> <span class="o">=</span> <span class="p">(</span><span class="mf">36.6026</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.9026</span><span class="p">)</span>
@@ -144,7 +144,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="5">
 <li>Each edge in the graph contains information about the road, including a list of points along this road. We first create a function that returns this array of coordinates, for any edge in the graph.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_path</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">n1</span><span class="p">):</span>
@@ -155,7 +155,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="6">
 <li>We will notably use the road path to compute its length. We first need to define a function that computes the distance between any two points in geographical coordinates. This function has been found in <a href="http://stackoverflow.com/questions/8858838/need-help-calculating-geographical-distance">StackOverflow</a>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">EARTH_R</span> <span class="o">=</span> <span class="mf">6372.8</span>
@@ -178,7 +178,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="7">
 <li>Now, we define a function computing a path's length.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_path_length</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -187,7 +187,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="8">
 <li>Now, we update our graph by computing the distance between any two connected nodes. We add this information in the <code>distance</code> attribute of the edges.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="c"># Compute the length of the road segments.</span>
@@ -198,7 +198,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="9">
 <li>The last step before we can find the shortest path in the graph, is to find the two nodes in the graph that are closest to the two requested positions.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
@@ -208,7 +208,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="10">
 <li>Now, we use NetworkX's <code>shortest_path</code> function to compute the shortest path between our two positions. We specify that the weight of every edge is the length of the road between them.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="c"># Compute the shortest path.</span>
@@ -222,7 +222,7 @@
 
 <pre class="ipynb-output">19</pre>
 
-<ol>
+<ol start="11">
 <li>The itinerary has been computed. The <code>path</code> variable contains the list of edges that form the shortest path between our two positions. Now, we can get information about the itinerary with Pandas. The dataset has a few fields of interest, including the name and type (State, Interstate, etc.) of the roads.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">roads</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">sg</span><span class="o">.</span><span class="n">edge</span><span class="p">[</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span> 
@@ -382,14 +382,14 @@
 
 <pre class="ipynb-output">508.66434555909808</pre>
 
-<ol>
+<ol start="12">
 <li>Finally, let display the itinerary on the map. We first retrieve the map with Smopy.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="nb">map</span> <span class="o">=</span> <span class="n">smopy</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">pos0</span><span class="p">,</span> <span class="n">pos1</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">margin</span><span class="o">=.</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 
-<ol>
+<ol start="13">
 <li>Our path contains connected nodes in the graph. Every edge between two nodes is characterized by a list of points (constituting a part of the road). Therefore, we need to define a function that concatenates the positions along every edge in the path. A difficulty is that we need to concatenate the positions in the right order along our path. We choose the order based on the fact that the last point in an edge needs to be close to the first point in the next edge.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">get_full_path</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -408,7 +408,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="14">
 <li>We convert the path in pixels in order to display it on the Smopy map.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">linepath</span> <span class="o">=</span> <span class="n">get_full_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -416,7 +416,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="15">
 <li>Finally, we display the map, with our two positions and the computed itinerary between them.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>

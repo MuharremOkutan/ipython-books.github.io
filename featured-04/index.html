@@ -187,14 +187,14 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="2">
 <li>We now define the deterministic function underlying our generative model.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 
-<ol>
+<ol start="3">
 <li>We generate the values along the curve on <span class="math">\([0, 2]\)</span>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">x_tr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -202,7 +202,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="4">
 <li>Now, let's generate our data points within <span class="math">\([0, 1]\)</span>. We use the function <span class="math">\(f\)</span> and we add some Gaussian noise.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -210,7 +210,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="5">
 <li>Let's plot our data points on <span class="math">\([0, 1]\)</span>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">));</span>
@@ -955,7 +955,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAo0f8PwtD9IUwXllYAAAAASUVORK5CYII=" /></p>
-<ol>
+<ol start="6">
 <li>Now, we use scikit-learn to fit a linear model to the data. There are three steps. First, we create the model (an instance of the <code>LinearRegression</code> class). Then we fit the model to our data. Finally, we predict values from our trained model.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="c"># We create the model.</span>
@@ -968,7 +968,7 @@ AAAAAAAo0f8PwtD9IUwXllYAAAAASUVORK5CYII=" /></p>
 </div>
 
 <p>We need to convert <code>x</code> and <code>x_tr</code> to column vectors, as it is a general convention in scikit-learn that observations are rows, while features are columns. Here, we have 7 observations with 1 feature.</p>
-<ol>
+<ol start="7">
 <li>We now plot the result of the trained linear model. We obtain a regression line, in green here.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">));</span>
@@ -2151,7 +2151,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADYpP4LeXDGGjUoAB0A
 AAAASUVORK5CYII=" /></p>
-<ol>
+<ol start="8">
 <li>The linear fit is not well adapted here, since the data points are generated according to a nonlinear model (an exponential curve). Therefore, we are now going to fit a nonlinear model. More precisely, we will fit a polynomial function to our data points. We can still use linear regression for that, by pre-computing the exponents of our data points. This is done by generating a <strong>Vandermonde matrix</strong>, using the <code>np.vander</code> function. We will explain this trick in more detail in <em>How it works...</em>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">lrp</span> <span class="o">=</span> <span class="n">lm</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
@@ -3676,7 +3676,7 @@ JEmSJEmSJOn/bw8OCQAAAAAE/X9t9gMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMqnIeE/mIDV4AAAAASUVORK5CYII=" /></p>
 <p>We have fitted two polynomial models of degree 2 and 5. The degree 2 polynomial appears to fit the data points less precisely than the degree 5 polynomial. However, it seems more robust: the degree 5 polynomial seems really bad at predicting values outside the data points (look for example at the portion <span class="math">\(x &gt;= 1\)</span>). This is what we call overfitting: by using a too complex model, we obtain a better fit on the trained dataset, but a less robust model outside this set. Note the large coefficients of the degree 5 polynomial: this is generally a sign of overfitting.</p>
-<ol>
+<ol start="9">
 <li>We will now use a different learning model, called <strong>ridge regression</strong>. It works like linear regression, except that it prevents the polynomial's coefficients to explode (which was what happened in the overfitting example above). By adding a <strong>regularization term</strong> in the <strong>loss function</strong>, ridge regression imposes some structure on the underlying model. We will see more details in the next section.</li>
 </ol>
 <p>The ridge regression model has a meta-parameter which represents the weight of the regularization term. We could try different values with trials and errors, using the <code>Ridge</code> class. However, scikit-learn includes another model called <code>RidgeCV</code> which includes a parameter search with cross-validation. In practice, it means that we don't have to tweak this parameter by hand: scikit-learn does it for us. Since the models of scikit-learn always follow the <code>fit</code>-<code>predict</code> API, all we have to do is replace <code>lm.LinearRegression</code> by <code>lm.RidgeCV</code> in the code above. We will give more details in the next section.</p>

@@ -103,7 +103,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="2">
 <li>We define a few constants in the International System of Units.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c"># gravity of Earth</span>
@@ -115,7 +115,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="3">
 <li>We define the initial positions of the masses. They are arranged on a two-dimensional grid with two lines and <span class="math">\(n/2\)</span> columns.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -124,14 +124,14 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="4">
 <li>Now, let's define the connectivity matrix between the masses. Coefficient <span class="math">\(i,j\)</span> is <span class="math">\(1\)</span> if masses <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are connected by a spring.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 
-<ol>
+<ol start="5">
 <li>We also specify the spring stiffness of each spring. It is <span class="math">\(l\)</span>, except for <em>diagonal</em> springs where it is <span class="math">\(l \times \sqrt{2}\)</span>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">L</span> <span class="o">=</span> <span class="n">l</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -140,14 +140,14 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="6">
 <li>We also need the indices of the spring connections.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">I</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 
-<ol>
+<ol start="7">
 <li>The <code>dist</code> function computes the distance matrix (distance between any pair of masses).</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">dist</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> 
@@ -155,7 +155,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="8">
 <li>We define a function that displays the system. The springs are colored according to their tension.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">show_bar</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
@@ -181,7 +181,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="9">
 <li>Here is the system in its initial configuration.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">show_bar</span><span class="p">(</span><span class="n">P0</span><span class="p">);</span>
@@ -545,7 +545,7 @@ zMxvq3VvAAAAANaWiYmJ3juV3xgDAAAAINJqfvn+Fat4bwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANa+/wNu
 q6ZQIoR66gAAAABJRU5ErkJggg==" /></p>
-<ol>
+<ol start="10">
 <li>To find the equilibrium state, we need to minimize the total potential energy of the system. The following function computes the energy of the system, given the positions of the masses. This function is explained in <em>How it works...</em>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
@@ -561,7 +561,7 @@ q6ZQIoR66gAAAABJRU5ErkJggg==" /></p>
 </pre></div>
 </div>
 
-<ol>
+<ol start="11">
 <li>Let's compute the potential energy of the initial configuration.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">energy</span><span class="p">(</span><span class="n">P0</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
@@ -570,7 +570,7 @@ q6ZQIoR66gAAAABJRU5ErkJggg==" /></p>
 
 <pre class="ipynb-output">-0.98099999999999998</pre>
 
-<ol>
+<ol start="12">
 <li>Now, let's minimize the potential energy with a function minimization method. We need a <strong>constrained optimization algorithm</strong>, because we make the assumption that the two first masses are fixed to the wall. Therefore, their positions cannot change. The <a href="http://en.wikipedia.org/wiki/Limited-memory_BFGS#L-BFGS-B"><strong>L-BFGS-B</strong></a> algorithm, a variant of the BFGS algorithm, accepts bound constraints. Here, we force the first two points to stay at their initial positions, whereas there are no constraints on the other points. The <code>minimize</code> function accepts a <code>bounds</code> list containing, for each dimension, a pair of <code>[min, max]</code> values.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">P0</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">P0</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> \
@@ -584,7 +584,7 @@ q6ZQIoR66gAAAABJRU5ErkJggg==" /></p>
 </pre></div>
 </div>
 
-<ol>
+<ol start="13">
 <li>Let's display the stable configuration.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">show_bar</span><span class="p">(</span><span class="n">P1</span><span class="p">);</span>

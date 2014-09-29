@@ -110,7 +110,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="2">
 <li>You may sometimes need to make a copy of an array, for instance if you need to manipulate an array while keeping an original copy in memory.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="n">aid</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">aid</span>
@@ -156,7 +156,7 @@
 
 <p>Thanks to <a href="https://github.com/ipython-books/cookbook-code/issues/2">Michael Droettboom</a> for pointing out this precision and proposing this alternative solution.</p>
 <h3>In-place and implicit copy operations</h3>
-<ol>
+<ol start="3">
 <li>Array computations can involve in-place operations (first example below: the array is modified) or implicit-copy operations (second example: a new array is created).</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">a</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">aid</span>
@@ -186,7 +186,7 @@
 
 <pre class="ipynb-output">10 loops, best of 3: 42.6 ms per loop</pre>
 
-<ol>
+<ol start="4">
 <li>Reshaping an array may or may not involve a copy. The reasons will be explained below. For instance, reshaping a 2D matrix does not involve a copy, unless it is transposed (or more generally non-contiguous):</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span> <span class="n">aid</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">aid</span>
@@ -210,7 +210,7 @@
 <pre class="ipynb-output">False</pre>
 
 <p>Therefore, the latter instruction will be significantly slower than the former.</p>
-<ol>
+<ol start="5">
 <li>The flatten and ravel methods of an array reshape it into a 1D vector (flattened array). The former method always returns a copy, whereas the latter returns a copy only if necessary (so it's significantly faster too, especially with large arrays).</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span> <span class="nb">id</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="n">aid</span>
@@ -238,7 +238,7 @@
 <pre class="ipynb-output">1000000 loops, best of 3: 294 ns per loop</pre>
 
 <h3>Broadcasting rules</h3>
-<ol>
+<ol start="6">
 <li><strong>Broadcasting rules</strong> allow you to make computations on arrays with different but compatible shapes. In other words, you don't always need to reshape or tile your arrays to make their shapes match. The following example illustrates two ways of doing an outer product between two vectors: the first method involves array tiling, the second one involves broadcasting. The last method is significantly faster.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -277,7 +277,7 @@
 </div>
 
 <h3>Array views and fancy indexing</h3>
-<ol>
+<ol start="2">
 <li>Let's select one every ten rows, using two different methods (array view and fancy indexing).</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">b1</span> <span class="o">=</span> <span class="n">a</span><span class="p">[::</span><span class="mi">10</span><span class="p">]</span>
@@ -291,7 +291,7 @@
 
 <pre class="ipynb-output">True</pre>
 
-<ol>
+<ol start="3">
 <li>The view refers to the original data buffer, whereas fancy indexing yields a copy.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="nb">id</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span> <span class="o">==</span> <span class="n">aid</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span> <span class="o">==</span> <span class="n">aid</span>
@@ -300,7 +300,7 @@
 
 <pre class="ipynb-output">(True, False)</pre>
 
-<ol>
+<ol start="4">
 <li>Let's compare the performance of both methods.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="o">%</span><span class="n">timeit</span> <span class="n">a</span><span class="p">[::</span><span class="mi">10</span><span class="p">]</span>
@@ -317,7 +317,7 @@
 
 <p>Fancy indexing is several orders of magnitude slower as it involves copying a large array.</p>
 <h3>Alternatives to fancy indexing: list of indices</h3>
-<ol>
+<ol start="5">
 <li>When non-strided selections need to be done along one dimension, array views are not an option. However, alternatives to fancy indexing still exist in this case. Given a list of indices, NumPy's function take performs a selection along one axis.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -349,7 +349,7 @@
 <pre class="ipynb-output">100 loops, best of 3: 4.87 ms per loop</pre>
 
 <h3>Alternatives to fancy indexing: mask of booleans</h3>
-<ol>
+<ol start="6">
 <li>When the indices to select along one axis are specified by a vector of boolean masks, the function <code>compress</code> is an alternative to fancy indexing.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">.</span><span class="mi">5</span>

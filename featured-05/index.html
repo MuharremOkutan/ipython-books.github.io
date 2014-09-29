@@ -105,7 +105,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="2">
 <li>We will simulate the following system of partial differential equations on the domain <span class="math">\(E=[-1,1]^2\)</span>:</li>
 </ol>
 <p>
@@ -124,7 +124,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="3">
 <li>We discretize time and space. The following condition ensures that the discretization scheme we use here is stable:</li>
 </ol>
 <p>
@@ -141,7 +141,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="4">
 <li>We initialize the variables <span class="math">\(u\)</span> and <span class="math">\(v\)</span>. The matrices <span class="math">\(U\)</span> and <span class="math">\(V\)</span> contain the values of these variables on the vertices of the 2D grid. These variables are initialized with a uniform noise between <span class="math">\(0\)</span> and <span class="math">\(1\)</span>.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -149,7 +149,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="5">
 <li>Now, we define a function that computes the discrete Laplace operator of a 2D variable on the grid, using a five-point stencil finite difference method. This operator is defined by:</li>
 </ol>
 <p>
@@ -166,7 +166,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="6">
 <li>Now, we simulate the system of equations using the finite difference method. At each time step, we compute the right-hand sides of the two equations on the grid using discrete spatial derivatives (Laplacians). Then, we update the variables using a discrete time derivative.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="c"># We simulate the PDE with the finite difference method.</span>
@@ -191,7 +191,7 @@
 </pre></div>
 </div>
 
-<ol>
+<ol start="7">
 <li>Finally, we display the variable <span class="math">\(u\)</span> after a time <span class="math">\(T\)</span> of simulation.</li>
 </ol>
 <div class="ipynb-input"><div class="highlight"><pre><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">copper</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span>
