@@ -28,7 +28,7 @@
         <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
         <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
-        <title>IPython Books - IPython Cookbook released</title>
+        <title>IPython Books</title>
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -46,12 +46,6 @@
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".content").fitVids();
-        });
-    </script>
 </head>
 
 <body>
@@ -87,53 +81,52 @@
     <div id="layout" class="pure-g">
         <section id="content" class="pure-u-1 pure-u-md-3-4">
             <div class="l-box">
+    <section id="tag-posts">
 
-    <header id="post-header">
-        <h1>IPython Cookbook released</h1>
-            <div class="post-meta">
-                September 26, 2014
-            </div>
-    </header>
+        <header id="tag-header">
+            <h1>tag: cookbook</h1>
+        </header>
 
-    <section id="post">
-        <p>My new book, <a href="/cookbook/">IPython Interactive Computing and Visualization Cookbook</a>, has just been released! A sequel to my previous <a href="http://ipython.rossant.net">beginner-level book on Python for data analysis</a>, this new 500-page book is a <strong>complete advanced-level guide to Python for data science</strong>. The 100+ recipes cover not only interactive and high-performance computing topics, but also data science methods in statistics, data mining, machine learning, signal processing, image processing, network analysis, and mathematical modeling.</p>
-
-
-<p>Here is a glimpse of the topics addressed in this book: </p>
-<ul>
-<li>IPython notebook, <strong>interactive widgets</strong> in IPython 2+</li>
-<li>Best practices in interactive computing: version control, workflows with IPython, testing, debugging, continuous integration...</li>
-<li>Data analysis with pandas, NumPy/SciPy, and matplotlib</li>
-<li>Advanced data visualization with <strong>seaborn, Bokeh, mpld3, d3.js, Vispy</strong>...</li>
-<li>Code profiling and optimization</li>
-<li>High-performance computing with <strong>Numba, Cython, GPGPU with CUDA/OpenCL, MPI, HDF5, Julia</strong>...</li>
-<li>Statistical data analysis with <strong>SciPy, PyMC, R</strong>...</li>
-<li>Machine learning with <strong>scikit-learn</strong></li>
-<li>Signal processing with SciPy, image processing with <strong>scikit-image</strong> and OpenCV</li>
-<li>Analysis of graphs and social networks with <strong>NetworkX</strong></li>
-<li>Geographic Information Systems in Python</li>
-<li>Mathematical modeling: dynamical systems, symbolic mathematics with <strong>SymPy</strong></li>
-</ul>
-<p>All of the code is freely available as IPython notebooks on the <a href="https://github.com/ipython-books/cookbook-code">book's GitHub repository</a>. This repository is also the place where you can signal errata or propose improvements to any part of the book.</p>
-<p>The book uses Python 3, although most of the code will work fine on Python 2.</p>
-<p>You'll find the book on <a href="https://www.packtpub.com/big-data-and-business-intelligence/ipython-interactive-computing-and-visualization-cookbook">Packt's website</a>, <a href="http://www.amazon.com/IPython-Interactive-Computing-Visualization-Cookbook/dp/1783284811/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1410688253&amp;sr=1-1">Amazon</a>, and many other bookstores.</p>
+    <section class="post">
+        <header class="post-header">
+            <h3><a href="http://ipython-books.github.io/windows-compiler/">New Microsoft C++ compiler for Python 2.7 on Windows,</a></h3>
+            <p class="sub-header-3">2014-09-29</p>
+            <p class="post-summary"><p>Compiling C extensions for Python on Windows used to be complicated. One had to install the adequate (unsupported) versions of Microsoft Visual Studio and the Windows compilers. Furthemore, it was necessary to invoke some commands on the command-line interface before running Python or IPython. In the end, installing non-pure-Python packages, or building non-pure-Python distributions for Windows users was a pain.</p>
+<p>Microsoft is now trying to simplify this task by releasing a compiler package specifically targetting Python 2.7. This means that it should be much easier to compile C extensions for Python 2.7 on Windows now.</p>
+</p>
+        </header>
+        <div class="read-more">
+            <a class="pure-button" href="http://ipython-books.github.io/windows-compiler/">
+                read on
+            </a>
+        </div>
     </section>
-
+        <hr />
+    <section class="post">
+        <header class="post-header">
+            <h3><a href="http://ipython-books.github.io/ipython-cookbook-released/">IPython Cookbook released</a></h3>
+            <p class="sub-header-3">2014-09-26</p>
+            <p class="post-summary"><p>My new book, <a href="/cookbook/">IPython Interactive Computing and Visualization Cookbook</a>, has just been released! A sequel to my previous <a href="http://ipython.rossant.net">beginner-level book on Python for data analysis</a>, this new 500-page book is a <strong>complete advanced-level guide to Python for data science</strong>. The 100+ recipes cover not only interactive and high-performance computing topics, but also data science methods in statistics, data mining, machine learning, signal processing, image processing, network analysis, and mathematical modeling.</p>
+</p>
+        </header>
+        <div class="read-more">
+            <a class="pure-button" href="http://ipython-books.github.io/ipython-cookbook-released/">
+                read on
+            </a>
+        </div>
+    </section>
 
 <nav class="pagination-wrapper">
     <div class="pagination">
         <div class="pagination-left">
-                <a href="http://ipython-books.github.io/windows-compiler/">
-                    &larr; previous
-                </a>
+                &nbsp;
         </div>
+
+
         <div class="pagination-right">
-                <a href="http://ipython-books.github.io/ipython-minibook-released/">
-                    next&nbsp;&rarr;
-                </a>
         </div>
     </div>
-</nav>
+</nav>    </section>
             </div>
         </section>
         
