@@ -28,7 +28,7 @@
         <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
         <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
-        <title>IPython Books</title>
+        <title>IPython Books - prettyplotlib is no longer being developed</title>
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -46,6 +46,12 @@
     
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
 </head>
 
 <body>
@@ -81,67 +87,44 @@
     <div id="layout" class="pure-g">
         <section id="content" class="pure-u-1 pure-u-md-3-4">
             <div class="l-box">
-    <section id="tag-posts">
 
-        <header id="tag-header">
-            <h1>tag: cookbook</h1>
-        </header>
+    <header id="post-header">
+        <h1>prettyplotlib is no longer being developed</h1>
+            <div class="post-meta">
+                October 11, 2014
+            </div>
+            <div class="post-tags">
+                <ul>
+                    <li>tags:</li>
+                    <li><a href="/tag/cookbook/">cookbook</a></li>
+                </ul>
+            </div>
+    </header>
 
-    <section class="post">
-        <header class="post-header">
-            <h3><a href="http://ipython-books.github.io/prettyplotlib-no-longer-being-developed/">prettyplotlib is no longer being developed</a></h3>
-            <p class="sub-header-3">2014-10-11</p>
-            <p class="post-summary"><p><a href="https://github.com/ipython-books/cookbook-code/issues/12">Github issue #12</a>.</p>
+    <section id="post">
+        <p><a href="https://github.com/ipython-books/cookbook-code/issues/12">Github issue #12</a>.</p>
 <p>prettyplotlib is covered in <a href="http://nbviewer.ipython.org/github/ipython-books/cookbook-code/blob/master/notebooks/chapter06_viz/01_prettyplotlib.ipynb">recipe 6.1</a>. However, <a href="http://www.olgabotvinnik.com/">Olga Botvinnik</a> (<a href="https://github.com/olgabot">@olgabot</a>) <a href="http://blog.olgabotvinnik.com/blog/2014/10/06/no-longer-actively-developing-prettyplotlib/">is no longer actively developing this library</a>.</p>
-</p>
-        </header>
-        <div class="read-more">
-            <a class="pure-button" href="http://ipython-books.github.io/prettyplotlib-no-longer-being-developed/">
-                read on
-            </a>
-        </div>
+
+
+<p>If you are interested in similar features for improving matplotlib's styling, you can:</p>
+<ul>
+<li>Use <a href="http://matplotlib.org/users/style_sheets.html">matplotlib stylesheets</a>, new in matplotlib 1.4</li>
+<li>Use <a href="http://web.stanford.edu/~mwaskom/software/seaborn/">seaborn</a>, actively maintained by <a href="http://stanford.edu/~mwaskom/">Michael Waskom</a> (<a href="https://github.com/mwaskom">@mwaskom</a>)</li>
+</ul>
     </section>
-        <hr />
-    <section class="post">
-        <header class="post-header">
-            <h3><a href="http://ipython-books.github.io/windows-compiler/">New Microsoft C++ compiler for Python 2.7 on Windows</a></h3>
-            <p class="sub-header-3">2014-09-29</p>
-            <p class="post-summary"><p>Compiling C extensions for Python on Windows used to be complicated. One had to install the adequate (unsupported) versions of Microsoft Visual Studio and the Windows compilers. Furthemore, it was necessary to invoke some commands on the command-line interface before running Python or IPython. In the end, installing non-pure-Python packages, or building non-pure-Python distributions for Windows users was a pain.</p>
-<p>Microsoft is now trying to simplify this task by releasing a compiler package specifically targetting Python 2.7. This means that it should be much easier to compile C extensions for Python 2.7 on Windows now.</p>
-</p>
-        </header>
-        <div class="read-more">
-            <a class="pure-button" href="http://ipython-books.github.io/windows-compiler/">
-                read on
-            </a>
-        </div>
-    </section>
-        <hr />
-    <section class="post">
-        <header class="post-header">
-            <h3><a href="http://ipython-books.github.io/ipython-cookbook-released/">IPython Cookbook released</a></h3>
-            <p class="sub-header-3">2014-09-26</p>
-            <p class="post-summary"><p>My new book, <a href="/cookbook/">IPython Interactive Computing and Visualization Cookbook</a>, has just been released! A sequel to my previous <a href="http://ipython.rossant.net">beginner-level book on Python for data analysis</a>, this new 500-page book is a <strong>complete advanced-level guide to Python for data science</strong>. The 100+ recipes cover not only interactive and high-performance computing topics, but also data science methods in statistics, data mining, machine learning, signal processing, image processing, network analysis, and mathematical modeling.</p>
-</p>
-        </header>
-        <div class="read-more">
-            <a class="pure-button" href="http://ipython-books.github.io/ipython-cookbook-released/">
-                read on
-            </a>
-        </div>
-    </section>
+
 
 <nav class="pagination-wrapper">
     <div class="pagination">
         <div class="pagination-left">
-                &nbsp;
         </div>
-
-
         <div class="pagination-right">
+                <a href="http://ipython-books.github.io/windows-compiler/">
+                    next&nbsp;&rarr;
+                </a>
         </div>
     </div>
-</nav>    </section>
+</nav>
             </div>
         </section>
         
