@@ -25,8 +25,8 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
-        <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
+        <link rel="alternate"  href="//feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
+        <link rel="alternate" href="//feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
         <title>IPython Books - Featured Recipe #3: Creating a route planner for road network</title>
 
@@ -38,8 +38,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -91,7 +91,7 @@
 <p>This is a featured recipe from the <a href="http://ipython-books.github.io/"><strong>IPython Cookbook</strong></a>, the definitive guide to <strong>high-performance scientific computing</strong> and <strong>data science</strong> in Python.</p>
 </blockquote>
 <p>In this featured recipe, we create a simple <strong>GPS-like route planner</strong> in Python. We retrieve California's road network data from the <em>United States Census Bureau</em> in order to find shortest paths and compute road itineraries between any two locations in California.</p>
-<h2>Getting Ready</h2>
+<h2 id="getting-ready">Getting Ready</h2>
 <p>For this recipe, you need IPython, NumPy, Pandas, matplotlib.</p>
 <p>You also need <a href="http://networkx.github.io/">NetworkX</a> and <a href="http://www.gdal.org/ogr/">GDAL/OGR</a>. On Windows, you can find binary installers on <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">Chris Gohlke's webpage</a>.</p>
 <blockquote>
@@ -103,7 +103,7 @@
 </div>
 
 <p>Finally, you need to download the <a href="https://github.com/ipython-books/cookbook-data"><em>Road</em> dataset</a> on the book's website an extract it in the current folder. The data comes from the <a href="http://www.census.gov/geo/maps-data/data/tiger.html">United States Census Bureau website</a>.</p>
-<h2>How to do it...</h2>
+<h2 id="how-to-do-it">How to do it...</h2>
 <ol>
 <li>Let's import the packages.</li>
 </ol>
@@ -430,10 +430,10 @@
 </div>
 
 <p><img alt="Route planner" src="/images/road.jpg" /></p>
-<h2>How it works...</h2>
+<h2 id="how-it-works">How it works...</h2>
 <p>We computed the shortest path with NetworkX's <code>shortest_path</code> function. Here, this function used <strong>Dijkstra's algorithm</strong>. This algorithm has a wide variety of applications, for example in network routing protocols.</p>
 <p>There are different ways to compute the geographical distance between two points. Here, we used a relatively precise formula: the <strong>orthodromic distance</strong> (also called <strong>great-circle distance</strong>), which assumes that the Earth is a perfect sphere. We could also have used a simpler formula since the distance between two successive points on a road is small.</p>
-<h2>There's more...</h2>
+<h2 id="theres-more">There's more...</h2>
 <p>You can find more information about shortest path problems and Dijkstra's algorithm in the following references:</p>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Shortest_path_problem">Shortest path</a>.</li>

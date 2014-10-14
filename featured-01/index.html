@@ -25,8 +25,8 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
-        <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
+        <link rel="alternate"  href="//feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
+        <link rel="alternate" href="//feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
         <title>IPython Books - Featured Recipe #1: Getting the Best Performance out of NumPy</title>
 
@@ -38,8 +38,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -93,13 +93,13 @@
 <p><strong>NumPy</strong> is the cornerstone of the scientific Python software stack. It provides a special data type optimized for vector computations, the <code>ndarray</code>. This object is at the core of most algorithms in scientific numerical computing.</p>
 <p>With NumPy arrays, you can achieve significant performance speedups over native Python, particularly when your computations follow the <strong><em>Single Instruction, Multiple Data</em> (SIMD)</strong> paradigm. However, it is also possible to unintentionally write non-optimized code with NumPy.</p>
 <p>In this featured recipe, we will see some tricks that can help you write optimized NumPy code. We will start by looking at ways to avoid unnecessary array copies in order to save time and memory. In that respect, we will need to dig into the internals of NumPy.</p>
-<h2>Learning to avoid unnecessary array copies</h2>
+<h2 id="learning-to-avoid-unnecessary-array-copies">Learning to avoid unnecessary array copies</h2>
 <p>Computations with NumPy arrays may involve internal copies between blocks of memory. These copies are not always necessary, in which case they should be avoided. Here are a few tips that can help you optimize your code accordingly.</p>
 <div class="ipynb-input"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 
-<h3>Inspect the memory address of arrays</h3>
+<h3 id="inspect-the-memory-address-of-arrays">Inspect the memory address of arrays</h3>
 <ol>
 <li>The first step when looking for silent array copies is to find out the location of arrays in memory. The following function does just that:</li>
 </ol>
@@ -155,7 +155,7 @@
 <pre class="ipynb-output">False True</pre>
 
 <p>Thanks to <a href="https://github.com/ipython-books/cookbook-code/issues/2">Michael Droettboom</a> for pointing out this precision and proposing this alternative solution.</p>
-<h3>In-place and implicit copy operations</h3>
+<h3 id="in-place-and-implicit-copy-operations">In-place and implicit copy operations</h3>
 <ol start="3">
 <li>Array computations can involve in-place operations (first example below: the array is modified) or implicit-copy operations (second example: a new array is created).</li>
 </ol>
@@ -237,7 +237,7 @@
 
 <pre class="ipynb-output">1000000 loops, best of 3: 294 ns per loop</pre>
 
-<h3>Broadcasting rules</h3>
+<h3 id="broadcasting-rules">Broadcasting rules</h3>
 <ol start="6">
 <li><strong>Broadcasting rules</strong> allow you to make computations on arrays with different but compatible shapes. In other words, you don't always need to reshape or tile your arrays to make their shapes match. The following example illustrates two ways of doing an outer product between two vectors: the first method involves array tiling, the second one involves broadcasting. The last method is significantly faster.</li>
 </ol>
@@ -263,7 +263,7 @@
 
 <pre class="ipynb-output">100 loops, best of 3: 2.36 ms per loop</pre>
 
-<h2>Making efficient selections in arrays with NumPy</h2>
+<h2 id="making-efficient-selections-in-arrays-with-numpy">Making efficient selections in arrays with NumPy</h2>
 <p>NumPy offers multiple ways of selecting slices of arrays. Array views refer to the original data buffer of an array, but with different offsets, shapes and strides. They only permit strided selections (i.e. with linearly spaced indices). NumPy also offers specific functions to make arbitrary selections along one axis. Finally, fancy indexing is the most general selection method, but it is also the slowest as we will see in this recipe. Faster alternatives should be chosen when possible.</p>
 <ol>
 <li>Let's create an array with a large number of rows. We will select slices of this array along the first dimension.</li>
@@ -276,7 +276,7 @@
 </pre></div>
 </div>
 
-<h3>Array views and fancy indexing</h3>
+<h3 id="array-views-and-fancy-indexing">Array views and fancy indexing</h3>
 <ol start="2">
 <li>Let's select one every ten rows, using two different methods (array view and fancy indexing).</li>
 </ol>
@@ -316,7 +316,7 @@
 <pre class="ipynb-output">100 loops, best of 3: 14.1 ms per loop</pre>
 
 <p>Fancy indexing is several orders of magnitude slower as it involves copying a large array.</p>
-<h3>Alternatives to fancy indexing: list of indices</h3>
+<h3 id="alternatives-to-fancy-indexing-list-of-indices">Alternatives to fancy indexing: list of indices</h3>
 <ol start="5">
 <li>When non-strided selections need to be done along one dimension, array views are not an option. However, alternatives to fancy indexing still exist in this case. Given a list of indices, NumPy's function take performs a selection along one axis.</li>
 </ol>
@@ -348,7 +348,7 @@
 
 <pre class="ipynb-output">100 loops, best of 3: 4.87 ms per loop</pre>
 
-<h3>Alternatives to fancy indexing: mask of booleans</h3>
+<h3 id="alternatives-to-fancy-indexing-mask-of-booleans">Alternatives to fancy indexing: mask of booleans</h3>
 <ol start="6">
 <li>When the indices to select along one axis are specified by a vector of boolean masks, the function <code>compress</code> is an alternative to fancy indexing.</li>
 </ol>
@@ -383,9 +383,9 @@
 <p>The second method is also significantly faster than fancy indexing.</p>
 <p>Fancy indexing is the most general way of making completely arbitrary selections of an array. However, more specific and faster methods often exist and should be preferred when possible.</p>
 <p>Array views should be used whenever strided selections have to be done, but one needs to be careful about the fact that views refer to the original data buffer.</p>
-<h2>How it works?</h2>
+<h2 id="how-it-works">How it works?</h2>
 <p>In this section, we will see what happens under the hood when using NumPy, and how this knowledge allows us to understand the tricks given in this recipe.</p>
-<h3>Why are NumPy arrays efficient?</h3>
+<h3 id="why-are-numpy-arrays-efficient">Why are NumPy arrays efficient?</h3>
 <p>A NumPy array is basically described by metadata (number of dimensions, shape, data type, and so on) and the actual data. The data is stored in a homogeneous and contiguous block of memory, at a particular address in system memory (<em>Random Access Memory</em>, or RAM). This block of memory is called the <strong>data buffer</strong>. This is the main difference with a pure Python structure, like a list, where the items are scattered across the system memory. This aspect is the critical feature that makes NumPy arrays so efficient.</p>
 <p>Why is this so important? Here are the main reasons:</p>
 <ol>
@@ -401,11 +401,11 @@
 </ol>
 <p>Additionally, let's mention the fact that NumPy can be linked to highly optimized linear algebra libraries like <em>BLAS</em> and <em>LAPACK</em>, for example through the <em>Intel Math Kernel Library (MKL)</em>. A few specific matrix computations may also be multithreaded, taking advantage of the power of modern multicore processors.</p>
 <p>In conclusion, <strong>storing data in a contiguous block of memory ensures that the architecture of modern CPUs is used optimally, in terms of memory access patterns, CPU cache, and vectorized instructions</strong>.</p>
-<h3>What is the difference between in-place and implicit-copy operations?</h3>
+<h3 id="what-is-the-difference-between-in-place-and-implicit-copy-operations">What is the difference between in-place and implicit-copy operations?</h3>
 <p>Let's explain trick 3. An expression like <code>a *= 2</code> corresponds to an in-place operation, where all values of the array are multiplied by two. By contrast, <code>a = a * 2</code> means that a new array containing the values of <code>a * 2</code> is created, and the variable a now points to this new array. The old array becomes unreferenced and will be deleted by the garbage collector. No memory allocation happens in the first case, contrary to the second case.</p>
 <p>More generally, expressions like <code>a[i:j]</code> are views to parts of an array: they point to the memory buffer containing the data. Modifying them with in-place operations changes the original array. Hence, <code>a[:] = a * 2</code> results in an in-place operation, unlike <code>a = a * 2</code>.</p>
 <p>Knowing this subtlety of NumPy can help you fix some bugs (where an array is implicitly and unintentionally modified because of an operation on a view), and optimize the speed and memory consumption of your code by reducing the number of unnecessary copies.</p>
-<h3>Why cannot some arrays be reshaped without a copy?</h3>
+<h3 id="why-cannot-some-arrays-be-reshaped-without-a-copy">Why cannot some arrays be reshaped without a copy?</h3>
 <p>We explain here trick 4, where a transposed 2D matrix cannot be flattened without a copy. A 2D matrix contains items indexed by two numbers (row and column), but it is stored internally as a 1D contiguous block of memory, accessible with a single number. There is more than one way of storing matrix items in a 1D block of memory: we can put the elements of the first row first, the second row then, and so on, or the elements of the first column first, the second column then, and so on. The first method is called row-major order, whereas the latter is called column-major order. Choosing between the two methods is only a matter of internal convention: NumPy uses the row-major order, like C, but unlike FORTRAN.</p>
 <p><img alt="Array layout" src="/images/layout.png" /></p>
 <p>More generally, NumPy uses the notion of <strong>strides</strong> to convert between a multidimensional index and the memory location of the underlying (1D) sequence of elements. The specific mapping between <code>array[i1, i2]</code> and the relevant byte address of the internal data is given by</p>
@@ -422,9 +422,9 @@
 <pre class="ipynb-output">100000 loops, best of 3: 9.57 µs per loop
 10000 loops, best of 3: 68.3 µs per loop</pre>
 
-<h3>What are NumPy broadcasting rules?</h3>
+<h3 id="what-are-numpy-broadcasting-rules">What are NumPy broadcasting rules?</h3>
 <p>Broadcasting rules describe how arrays with different dimensions and/or shapes can still be used for computations. The general rule is that two dimensions are compatible when they are equal, or when one of them is 1. NumPy uses this rule to compare the shapes of the two arrays element-wise, starting with the trailing dimensions and working its way forward. The smallest dimension is internally stretched to match the other dimension, but this operation does not involve any memory copy.</p>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <p>Here are a few references:</p>
 <ul>
 <li><a href="http://cyrille.rossant.net/numpy-performance-tricks/">NumPy performance tricks</a>.</li>

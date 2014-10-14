@@ -25,8 +25,8 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
-        <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
+        <link rel="alternate"  href="//feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
+        <link rel="alternate" href="//feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
         <title>IPython Books - Featured Recipe #2: Simulating a Physical System by Minimizing an Energy</title>
 
@@ -38,8 +38,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -92,7 +92,7 @@
 </blockquote>
 <p>Mathematical optimization is a wide area of applied mathematics. It consists in finding a best solution to a given problem. Many real-world problems can be expressed in an optimization framework.</p>
 <p>In this recipe, we show how to find the equilibrium configuration of a physical system by minimizing its potential energy. More specifically, we consider a structure made of masses and springs, attached to a vertical wall and subject to gravity. Starting from an initial position, we want to find the equilibrium configuration where the gravity and elastic forces compensate.</p>
-<h2>How to do it...</h2>
+<h2 id="how-to-do-it">How to do it...</h2>
 <ol>
 <li>Let's import NumPy, SciPy and matplotlib.</li>
 </ol>
@@ -2101,7 +2101,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9/cFeLLb66Tn
 xYEAAAAASUVORK5CYII=" /></p>
 <p>This configuration looks realistic. The tension appears to be maximal on the top springs near the wall.</p>
-<h2>How it works...</h2>
+<h2 id="how-it-works">How it works...</h2>
 <p>This example is conceptually simple. The state of the system is only described by the positions of the masses. If we can write a Python function that returns the total energy of the system, finding the equilibrium is just a matter of minimizing this function. This is the <strong>principle of minimum total potential energy</strong>, due to the second law of thermodynamics.</p>
 <p>Here, we give an expression of the total energy of the system. Since we are only interested in the <em>equilibrium</em>, we omit any kinetic aspect and we only consider potential energy due to gravity (<strong>gravitational force</strong>) and spring forces (<strong>elastic potential energy</strong>).</p>
 <p>Let <span class="math">\(U\)</span> be the total potential energy of the system. It is the sum of the gravitational potential energies of the masses, and the elastic potential energies of the springs. Therefore:</p>
@@ -2118,7 +2118,7 @@ xYEAAAAASUVORK5CYII=" /></p>
 <li><span class="math">\(l_{ij}\)</span> is the relaxed length of spring <span class="math">\((i,j)\)</span>, or <span class="math">\(0\)</span> if masses <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are not attached.</li>
 </ul>
 <p>The <code>energy</code> function implements this formula using vectorized computations on NumPy arrays.</p>
-<h2>There's more...</h2>
+<h2 id="theres-more">There's more...</h2>
 <p>The following references contain details about the physics behind this formula:</p>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Potential_energy">Potential energy</a>.</li>

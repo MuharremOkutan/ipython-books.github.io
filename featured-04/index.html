@@ -25,8 +25,8 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 
 
-        <link rel="alternate"  href="http://ipython-books.github.io/feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
-        <link rel="alternate" href="http://ipython-books.github.io/feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
+        <link rel="alternate"  href="//feeds/atom.xml" type="application/atom+xml" title="IPython Books Full Atom Feed"/>
+        <link rel="alternate" href="//feeds/rss.xml" type="application/rss+xml" title="IPython Books Full RSS Feed"/>
 
         <title>IPython Books - Featured Recipe #4: Introduction to Machine Learning in Python with scikit-learn</title>
 
@@ -38,8 +38,8 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/styles.css">
-    <link rel="stylesheet" href="http://ipython-books.github.io/theme/css/pygments.css">
+    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/theme/css/pygments.css">
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,500" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
@@ -96,9 +96,9 @@
 <blockquote>
 <p>This featured recipe is <a href="https://github.com/ipython-books/cookbook-code/blob/master/toc.md#chapter-8-machine-learning">Chapter 8</a>'s introduction. In the <a href="http://ipython-books.github.io/">book</a>, the rest of the chapter illustrates many standard machine learning algorithms for classification, regression, feature selection, clustering, and dimension reduction.</p>
 </blockquote>
-<h2>Fundamental concepts in Machine Learning</h2>
+<h2 id="fundamental-concepts-in-machine-learning">Fundamental concepts in Machine Learning</h2>
 <p>Let's describe the fundamental definitions and concepts of machine learning.</p>
-<h3>Learning from data</h3>
+<h3 id="learning-from-data">Learning from data</h3>
 <p>In machine learning, most datasets can be represented as tables containing numerical values. Every row is called an <strong>observation</strong>, a <strong>sample</strong>, or a <strong>data point</strong>. Every column is called a <strong>feature</strong> or a <strong>variable</strong>.</p>
 <p>Let's call <span class="math">\(N\)</span> the number of rows (or number of points), and <span class="math">\(D\)</span> the number of columns (or number of features). The number <span class="math">\(D\)</span> is also called the <strong>dimensionality</strong> of the data. The reason is that we can view this table as a set <span class="math">\(E\)</span> of vectors in a space with <span class="math">\(D\)</span> dimensions (or <strong>vector space</strong>). Here, a vector <span class="math">\(x\)</span> contains <span class="math">\(D\)</span> numbers <span class="math">\((x_1, ..., x_D)\)</span>, also called <strong>components</strong>. This mathematical point of view is very useful and we will use it throughout this recipe. </p>
 <p>One generally makes the distinction between <em>supervised learning</em> and <em>unsupervised learning</em>.</p>
@@ -110,7 +110,7 @@
 <p><a href="http://en.wikipedia.org/wiki/Unsupervised_learning"><strong>Unsupervised learning</strong></a> is when we don't have any labels. What we want to do is discover some hidden structure in the data.</p>
 </li>
 </ul>
-<h3>Supervised learning</h3>
+<h3 id="supervised-learning">Supervised learning</h3>
 <p>Mathematically, supervised learning consists of finding a function <span class="math">\(f\)</span> that maps a set of points <span class="math">\(E\)</span> to a set of labels <span class="math">\(F\)</span>, knowing a finite set of associations <span class="math">\((x, y)\)</span> which is given by our data. This is what generalization is about: after observing the pairs <span class="math">\((x_i, y_i)\)</span>, given a new <span class="math">\(x\)</span>, we are able to find the corresponding <span class="math">\(y\)</span> by applying the function <span class="math">\(f\)</span> to <span class="math">\(x\)</span>.</p>
 <p>It is a common practice to split the set of data points into two subsets: the <strong>training set</strong> and the <strong>test set</strong>. We learn the function <span class="math">\(f\)</span> on the training set, and test it on the test set. This is essential when assessing the predictive power of a model. By training and testing a model on the same set, our model may not be able to generalize well. This is the fundamental concept of <strong>overfitting</strong>, which we will detail later.</p>
 <p>One generally makes the distinction between <strong>classification</strong> and <strong>regression</strong>, two particular instances of supervised learning.</p>
@@ -133,7 +133,7 @@
 </ul>
 <p>The figure below illustrates the difference between classification and regression.</p>
 <p><img alt="Difference between classification and regression" src="/images/ml.png" /></p>
-<h3>Unsupervised learning</h3>
+<h3 id="unsupervised-learning">Unsupervised learning</h3>
 <p>Broadly speaking, unsupervised learning helps us discover systemic structures in our data. It is harder to grasp than supervised learning, in that there is no precise question and answer in general.</p>
 <p>Here are a few important terms related to unsupervised learning: </p>
 <ul>
@@ -142,7 +142,7 @@
 <li><strong>Dimension reduction</strong>: Getting a simple representation of high-dimensional data points by projecting them onto a lower-dimensional space. This technique is notably used for data visualization.</li>
 <li><strong>Manifold learning</strong> (or nonlinear dimension reduction): Finding a low-dimensional manifold containing the data points.</li>
 </ul>
-<h3>Feature selection and feature extraction</h3>
+<h3 id="feature-selection-and-feature-extraction">Feature selection and feature extraction</h3>
 <p>In a supervised learning context, when our data contains many features, it is sometimes necessary to choose a subset of them. The features we want to keep are those that are most relevant to our question. This is the problem of <strong>feature selection</strong>.</p>
 <p>Additionally, we may want to extract new features by applying complex transformations on our original dataset. This is <strong>feature extraction</strong>. For example, in computer vision, training a classifier directly on the pixels is not the most efficient method in general. We may want to extract the relevant points of interest or make appropriate mathematical transformations. These steps depend on our dataset and on the questions we want to answer.</p>
 <p>For example, it is often necessary to preprocess the data before learning models. <strong>Feature scaling</strong> (or <strong>data normalization</strong>) is a common preprocessing step where features are linearly rescaled to fit in the range <span class="math">\([-1,1]\)</span> or <span class="math">\([0,1]\)</span>.</p>
@@ -152,12 +152,12 @@
 <li><a href="http://scikit-learn.org/stable/modules/feature_selection.html">Feature selection in scikit-learn</a></li>
 <li><a href="http://en.wikipedia.org/wiki/Feature_selection">Feature selection on Wikipedia</a></li>
 </ul>
-<h3>Overfitting, underfitting, and the bias-variance tradeoff</h3>
+<h3 id="overfitting-underfitting-and-the-bias-variance-tradeoff">Overfitting, underfitting, and the bias-variance tradeoff</h3>
 <p>A central notion in machine learning is the trade-off between <a href="http://en.wikipedia.org/wiki/Overfitting"><strong>overfitting</strong></a> and <a href="http://en.wikipedia.org/wiki/Underfitting"><strong>underfitting</strong></a>. A model may be able to represent our data accurately. However, if it is <em>too</em> accurate, it may not generalize well to unobserved data. For example, in face recognition, a too-accurate model would be unable to identity someone who styled their hair differently that day. The reason is that our model may learn irrelevant features in the training data. On the contrary, an insufficiently trained model would not generalize well either. For example, it would be unable to correctly recognize twins. </p>
 <p>A popular solution to reduce overfitting consists of adding structure to the model, for example with <a href="http://en.wikipedia.org/wiki/Regularization_%28mathematics%29"><strong>regularization</strong></a>. This method favors simpler models during training (<a href="http://en.wikipedia.org/wiki/Occam%27s_razor">Occam's razor</a>).</p>
 <p>The <a href="http://en.wikipedia.org/wiki/Bias-variance_dilemma"><strong>bias-variance dilemma</strong></a> is closely related. The <strong>bias</strong> of a model quantifies how precise a model is across training sets. The <strong>variance</strong> quantifies how sensitive the model is to small changes in the training set. A robust model is not overly sensitive to small changes. The dilemma involves minimizing both bias and variance; we want a precise and robust model. Simpler models tend to be less accurate but more robust. Complex models tend to be more accurate but less robust.</p>
 <p>The importance of this trade-off cannot be overstated. This question pervades the entire discipline of machine learning. <em>Chapter 8</em> contains many examples.</p>
-<h3>Model selection</h3>
+<h3 id="model-selection">Model selection</h3>
 <p>As we will see in <em>Chapter 8</em>, there are many supervised and unsupervised algorithms. For example, well-known classifiers that we will cover include logistic regression, nearest-neighbors, Naive Bayes, support vector machines. There are many others algorithms that we couldn't cover.</p>
 <p>No model performs uniformly better than the others. One model may perform well on one dataset and badly on another. This is the question of <a href="http://en.wikipedia.org/wiki/Model_selection"><strong>model selection</strong></a>.</p>
 <p>We will see systematic methods for assessing the quality of a model on a particular dataset (notably cross-validation). In practice, machine learning is not an "exact science" in that it frequently involves trials and errors. We need to try different models and empirically choose the one that performs best.</p>
@@ -168,13 +168,13 @@
 <li><a href="http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/">How to choose a classifier?</a></li>
 </ul>
 <p>An important class of machine learning methods that we couldn't cover in <em>Chapter 8</em> include <a href="http://en.wikipedia.org/wiki/Artificial_neural_network"><strong>neural networks</strong></a> and <a href="http://en.wikipedia.org/wiki/Deep_learning"><strong>deep learning</strong></a>. Deep learning is the subject of very active research in machine learning. Many state-of-the-art results are currently achieved by deep learning methods.</p>
-<h2>Getting started with scikit-learn</h2>
+<h2 id="getting-started-with-scikit-learn">Getting started with scikit-learn</h2>
 <p>Let's now introduce the basics of the machine learning package <a href="http://scikit-learn.org"><strong>scikit-learn</strong></a>. This package is the main tool we are going to use throughout the chapter. Its clean API makes it really easy to define, train, and test models. Plus, scikit-learn is specifically designed for speed and (relatively) big data.</p>
 <p>We will show here a very basic example of <strong>linear regression</strong> in the context of <strong>curve fitting</strong>. This toy example will allow us to illustrate key concepts such as linear models, overfitting, underfitting, regularization, and cross-validation.</p>
 <blockquote>
 <p>You will find all instructions to install scikit-learn on the <a href="http://scikit-learn.org/stable/install.html">documentation</a>.</p>
 </blockquote>
-<h2>How to do it...</h2>
+<h2 id="how-to-do-it">How to do it...</h2>
 <p>We will generate a one-dimensional dataset with a simple model (including some noise), and we will try to fit a function to this data. With this function, we can predict values on new data points. This is a curve-fitting regression problem.</p>
 <ol>
 <li>First, let's make all the necessary imports.</li>
@@ -5319,14 +5319,14 @@ SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIk
 SZIkSZIkSZIkSZIkSZLUZf8PmQsBJpTu24QAAAAASUVORK5CYII=" /></p>
 <p>This time, the degree 5 polynomial seems more precise than the simpler degree 2 polynomial (which now causes underfitting). Ridge regression reduces the overfitting issue here. Observe how the degree 5 polynomial's coefficients are much smaller than in the previous example.</p>
-<h2>How it works...</h2>
+<h2 id="how-it-works">How it works...</h2>
 <p>In this section, we will explain all the aspects covered in the example above.</p>
-<h3>scikit-learn API</h3>
+<h3 id="scikit-learn-api">scikit-learn API</h3>
 <p>scikit-learn implements a clean and coherent API for supervised and unsupervised learning. Our data points should be in a <span class="math">\(N \times D\)</span> matrix <span class="math">\(\mathbf{X}\)</span>, where <span class="math">\(N\)</span> is the number of observations, and <span class="math">\(D\)</span> is the number of features. In other words, each row is an observation. The first step in a machine learning task is to define what our matrix <span class="math">\(\mathbf{X}\)</span> is exactly.</p>
 <p>In a supervised learning setup, we also have a <em>target</em>, a <span class="math">\(N\)</span>-long vector <span class="math">\(\mathbf{y}\)</span> with a scalar value for each observations. This value is continuous or discrete, depending on whether we have a regression or classification problem, respectively.</p>
 <p>In scikit-learn, models are implemented in classes that have <code>fit</code> and <code>predict</code> methods. The <code>fit</code> method accepts the data matrix <code>X</code> as input, and <code>y</code> as well for supervised learning models. This method <em>trains</em> the model on the given data.</p>
 <p>The <code>predict</code> method also takes data points as input (as a matrix <span class="math">\(M \times D\)</span>). It returns the labels or transformed points, according to the trained model.</p>
-<h3>Ordinary Least Squares regression</h3>
+<h3 id="ordinary-least-squares-regression">Ordinary Least Squares regression</h3>
 <p><a href="http://en.wikipedia.org/wiki/Ordinary_least_squares">Ordinary least squares regression</a> is one of the simplest regression methods. It consists of modeling the output values <span class="math">\(\hat{y}_i\)</span> as a linear combination of <span class="math">\(X_{ij}\)</span>:</p>
 <p>
 <div class="math">$$\forall i \in \{1, \ldots, N\}, \quad \hat{y}_i = \sum_{j=1}^D w_j X_{ij}, \quad \textrm{or, in matrix form:} \quad \mathbf{\hat{y}} = \mathbf{X} \mathbf{w}.$$</div>
@@ -5336,14 +5336,14 @@ SZIkSZIkSZIkSZIkSZLUZf8PmQsBJpTu24QAAAAASUVORK5CYII=" /></p>
 <div class="math">$$\min_{\mathbf{w}} || \mathbf{y} - \mathbf{X} \mathbf{w} ||_2^2 = \min_{\mathbf{w}} \left( \sum_{i=1}^N \left(y_i - \hat{y}_i\right)^2 \right)$$</div>
 </p>
 <p>This sum of the components squared is called the <a href="http://en.wikipedia.org/wiki/Lp_space"><strong><span class="math">\(l_2\)</span> norm</strong></a> (or <a href="http://en.wikipedia.org/wiki/Euclidean_distance"><strong>Euclidean norm</strong></a>). It is convenient because it leads to <em>differentiable</em> loss functions, so that gradients can be computed and common optimization procedures can be performed.</p>
-<h3>Polynomial interpolation with linear regression</h3>
+<h3 id="polynomial-interpolation-with-linear-regression">Polynomial interpolation with linear regression</h3>
 <p>Ordinary Least Squares regression fits a linear model to the data. The model is linear both in the data points <span class="math">\(X_i\)</span> and in the parameters <span class="math">\(w_j\)</span>. In our example, we obtained a poor fit because the data points were generated according to a nonlinear generative model (an exponential function).</p>
 <p>However, we can still use the linear regression method with a model that is linear in <span class="math">\(w_j\)</span>, but nonlinear in <span class="math">\(\mathbf{x}_i\)</span>. To do this, we need to increase the number of dimensions in our dataset by using a basis of polynomial functions. In other words, we consider the following observations:</p>
 <p>
 <div class="math">$$\mathbf{x}_i, \mathbf{x}_i^2, \ldots, \mathbf{x}_i^D$$</div>
 </p>
 <p>where <span class="math">\(D\)</span> is the maximum degree. The input matrix <span class="math">\(\mathbf{X}\)</span> is therefore the <a href="http://en.wikipedia.org/wiki/Vandermonde_matrix"><strong>Vandermonde matrix</strong></a> associated to the original data points <span class="math">\(\mathbf{x}_i\)</span>.</p>
-<h3>Ridge regression</h3>
+<h3 id="ridge-regression">Ridge regression</h3>
 <p>Polynomial interpolation with linear regression can lead to overfitting issues if the degree of the polynomials is too large. By capturing the random fluctuations (noise) instead of the general trend of the data, the model's predictive power decreases. This corresponds to an explosion of the polynomial's coefficients <span class="math">\(w_j\)</span>.</p>
 <p>A solution to this problem is to prevent these coefficients from growing unboundedly. With <a href="http://en.wikipedia.org/wiki/Tikhonov_regularization"><strong>ridge regression</strong></a>, this is done by adding a <em>regularization</em> term to the loss function:</p>
 <p>
@@ -5351,7 +5351,7 @@ SZIkSZIkSZIkSZIkSZLUZf8PmQsBJpTu24QAAAAASUVORK5CYII=" /></p>
 </p>
 <p>By minimizing this loss function, we not only minimize the error between the model and the data (first term, related to the bias), but also the size of the model's coefficients (second term, related to the variance). The bias-variance trade-off is quantified by the hyperparameter <span class="math">\(\alpha\)</span>, which precises the relative weight between the two terms in the loss function.</p>
 <p>Here, ridge regression led to a polynomial with smaller coefficients, and thus a better fit.</p>
-<h3>Cross-validation and grid search</h3>
+<h3 id="cross-validation-and-grid-search">Cross-validation and grid search</h3>
 <p>A drawback of the ridge regression model compared to the ordinary least squares model is the presence of an extra hyperparameter <span class="math">\(\alpha\)</span>. The quality of the prediction depends on the choice of this parameter. One possibility would be to fine-tune this parameter manually, but this procedure can be tedious and can also lead to overfitting.</p>
 <p>We can use a <a href="http://en.wikipedia.org/wiki/Hyperparameter_optimization"><strong>grid search</strong></a> for this: we loop over many possible values for <span class="math">\(\alpha\)</span>, and we evaluate the performance of the model for each possible value. Then, we choose the parameter that yields the best performance.</p>
 <p>How to assess the performance of a model with a given <span class="math">\(\alpha\)</span> value? A common solution is to use <a href="http://en.wikipedia.org/wiki/Cross-validation_%28statistics%29"><strong>cross-validation</strong></a>. This procedure consists of splitting the dataset into a <em>train set</em> and a <em>test set</em>. We fit the model on the train set, and test its predictive performance on the <em>test set</em>. By testing the model on a different dataset than the one used for training, we avoid overfitting.</p>
@@ -5360,7 +5360,7 @@ SZIkSZIkSZIkSZIkSZLUZf8PmQsBJpTu24QAAAAASUVORK5CYII=" /></p>
 <blockquote>
 <p>In the book, the <a href="https://github.com/ipython-books/cookbook-code/blob/master/toc.md#chapter-8-machine-learning">rest of the chapter</a> introduces many standard algorithms in machine learning.</p>
 </blockquote>
-<h2>There's more…</h2>
+<h2 id="theres-more">There's more…</h2>
 <p>Here are a few references about cross-validation and grid search:</p>
 <ul>
 <li><a href="http://scikit-learn.org/stable/modules/cross_validation.html">Cross validation in scikit-learn</a>.</li>
@@ -5371,7 +5371,7 @@ SZIkSZIkSZIkSZIkSZLUZf8PmQsBJpTu24QAAAAASUVORK5CYII=" /></p>
 <li><a href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html">scikit-learn basic tutorial</a>.</li>
 <li><a href="http://github.com/jakevdp/sklearn_scipy2013">scikit-learn tutorial given at the SciPy 2013 conference</a>.</li>
 </ul>
-<h3>Books</h3>
+<h3 id="books">Books</h3>
 <p>Here are a few excellent, math-heavy textbooks on machine learning:</p>
 <ul>
 <li>Bishop, C. M. (2006). <a href="http://research.microsoft.com/en-us/um/people/cmbishop/prml/"><em>Pattern recognition and machine learning</em></a>. Springer.</li>
